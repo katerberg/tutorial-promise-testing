@@ -65,5 +65,43 @@ describe('Foo', () => {
         done();
       });
     });
+
+  });
+
+  describe('multiSource', () => {
+    it('gets data from 2 sources and after fetches third and combines them', (done) => {
+      const testObject = new Foo();
+      const firstDefer = pDefer();
+      const secondDefer = pDefer();
+      const thirdDefer = pDefer();
+      sinon.stub(testObject, 'getData').returns(firstDefer.promise);
+      sinon.stub(testObject, 'getSecondData').returns(secondDefer.promise);
+      sinon.stub(testObject, 'getThirdData').returns(thirdDefer.promise);
+
+      testObject.multiSource().then(response => {
+        expect(response).to.eql(['first', 'second', 'third']);
+        done();
+      });
+
+      firstDefer.resolve('first');
+      secondDefer.resolve('second');
+      thirdDefer.resolve('third');
+    });
+
+    it('calls first and second simultaneously but not the third one', () => {
+      const testObject = new Foo();
+      const firstDefer = pDefer();
+      const secondDefer = pDefer();
+      const thirdDefer = pDefer();
+      sinon.stub(testObject, 'getData').returns(firstDefer.promise);
+      sinon.stub(testObject, 'getSecondData').returns(secondDefer.promise);
+      sinon.stub(testObject, 'getThirdData').returns(thirdDefer.promise);
+
+      testObject.multiSource()
+
+      expect(testObject.getData).to.have.been.called;
+      expect(testObject.getSecondData).to.have.been.called;
+      expect(testObject.getThirdData).not.to.have.been.called;
+    });
   });
 });

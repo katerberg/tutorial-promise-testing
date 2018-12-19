@@ -20,10 +20,23 @@ export default class Foo {
 //     });
   }
 
-  multiSource() {
+  async multiSource() {
     //get data from first and second and combine them
     //after that get data from third
     // return all combined
+    //
+    const firstPromise = this.getData();
+    const secondPromise = this.getSecondData();
+    const [first, second] = await Promise.all([firstPromise, secondPromise]);
+    return [first, second, await this.getThirdData()];
+    // const firstCall = this.getData();
+    // const secondCall = this.getSecondData();
+
+    // return Promise.all([firstCall, secondCall]).then(([first, second]) => {
+    //   return this.getThirdData().then(third => {
+    //     return [first, second, third];
+    //   });
+    // });
   }
 
   async getThirdData() {
