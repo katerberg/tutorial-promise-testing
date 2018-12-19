@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha \"src/**/*.test.js\""
+    "test": "mocha \"src/**/*.test.js\"",
+    "test:watch": "npm run test -- --watch"
   },
   "author": "Mark Katerberg <mark.katerberg@slalom.com> (slalom.com)",
   "license": "AGPL-3.0-or-later",
