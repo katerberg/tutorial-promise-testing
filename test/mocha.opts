@@ -1,0 +1,7 @@
+--require @babel/register
+--require @babel/polyfill
+--recursive
+--colors
+--reporter list
+--require test/setup
+--watch-extensions js,jsx

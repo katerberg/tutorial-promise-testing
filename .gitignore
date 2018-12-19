@@ -1,0 +1,32 @@
+# OS X
+.DS_Store*
+Icon?
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+.directory
+*~
+
+# npm
+node_modules
+*.log
+*.gz
+
+# Istanbul
+/coverage
+/.nyc_output
+
+# IDE files
+/.idea
+.idea
+/.idea_modules
+*.iml
+/.vscode
+
+# Build Output
+/test/e2e/screenshots
